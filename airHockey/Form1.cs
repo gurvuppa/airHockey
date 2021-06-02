@@ -13,16 +13,18 @@ namespace airHockey
     public partial class Form1 : Form
     {
         //global variables 
-        Rectangle player1 = new Rectangle(260, 150, 60, 60);
+        Rectangle player1 = new Rectangle(260, 25, 60, 60);
         Rectangle player2 = new Rectangle(260, 780, 60, 60);
-        Rectangle ball = new Rectangle(281, 420, 30, 30);
+        Rectangle puck = new Rectangle(281, 420, 30, 30);
+        Rectangle player1Goal = new Rectangle(159, 15, 265, 2);
+        Rectangle player2Goal = new Rectangle(159, 845, 265, 2);
 
         int player1Score = 0;
         int player2Score = 0;
 
-        int PLAYER_SPEED = 6ss;
-        int ballXSpeed = 6;
-        int ballYSpeed = 6;
+        int PLAYER_SPEED = 6;
+        int puckXSpeed = 6;
+        int puckYSpeed = 6;
 
         int lastP1X;
         int lastP1Y;
@@ -113,17 +115,21 @@ namespace airHockey
 
         private void gameTimer_Tick(object sender, EventArgs e)
         {
+
+            //Make game boarder
+            Rectangle boarder = new Rectangle(15, 15, this.Width - 30, this.Height - 30);
+
             //last move
             int p1X = player1.X;
             int p1Y = player1.Y;
             int p2X = player2.X;
             int p2Y = player2.Y;
-            int puckX = ball.X;
-            int puckY = ball.Y;
+            int puckX = puck.X;
+            int puckY = puck.Y;
 
-            //move ball
-            ball.X += ballXSpeed;
-            ball.Y += ballYSpeed;
+            //move puck
+            puck.X += puckXSpeed;
+            puck.Y += puckYSpeed;
 
             //move player1
             if (wDown == true && player1.Y > 0)
@@ -167,16 +173,16 @@ namespace airHockey
                 player2.X += PLAYER_SPEED;
             }
 
-            //ball collision with top and bottom walls
-            if (ball.Y < 0 || ball.Y > this.Height - ball.Height)
+            //puck collision with top and bottom walls
+            if (puck.Y < 15 || puck.Y > this.Height - puck.Height - 15)
             {
-                ballYSpeed *= -1;  
+                puckYSpeed *= -1;
             }
-
-            //ball collision with left and right side wall
-            if (ball.X < 0 || ball.X >= this.Width - ball.Width)
+            
+            //puck collision with left and right side wall
+            if (puck.X < 15 || puck.X >= this.Width - puck.Width - 15)
             {
-                ballXSpeed *= -1;
+                puckXSpeed *= -1;
             }
 
             //collision box for paddels
@@ -190,86 +196,90 @@ namespace airHockey
             Rectangle p2Right = new Rectangle(p2X + 60, p2Y, 1, 60);
             Rectangle p2Left = new Rectangle(p2X, p2Y, 1, 60);
 
-            //ball collision with player
-            if (p1Top.IntersectsWith(ball))
+            //puck collision with player
+            if (p1Top.IntersectsWith(puck))
             {
-                ballYSpeed *= -1;
+                puckYSpeed *= -1;
 
-                ball.X = puckX;
-                ball.Y = puckY;
+                puck.X = puckX;
+                puck.Y = puckY;
 
                 player1.X = p1X;
                 player1.Y = p1Y;
             }
 
-            if (p1Bot.IntersectsWith(ball))
+            if (p1Bot.IntersectsWith(puck))
             {
-                ballYSpeed *= -1;
+                puckYSpeed *= -1;
 
-                ball.X = puckX;
-                ball.Y = puckY;
+                puck.X = puckX;
+                puck.Y = puckY;
 
                 player1.X = p1X;
                 player1.Y = p1Y;
             }
 
-            if (p1Right.IntersectsWith(ball))
+            if (p1Right.IntersectsWith(puck))
             {
-                ballXSpeed *= -1;
+                puckXSpeed *= -1;
 
-                ball.X = puckX;
-                ball.Y = puckY;
+                puck.X = puckX;
+                puck.Y = puckY;
 
                 player1.X = p1X;
                 player1.Y = p1Y;
             }
 
-            if (p1Left.IntersectsWith(ball))
+            if (p1Left.IntersectsWith(puck))
             {
-                ballXSpeed *= -1;
+                puckXSpeed *= -1;
 
-                ball.X = puckX;
-                ball.Y = puckY;
+                puck.X = puckX;
+                puck.Y = puckY;
 
                 player1.X = p1X;
                 player1.Y = p1Y;
             }
 
-            if (p2Top.IntersectsWith(ball))
+            if (p2Top.IntersectsWith(puck))
             {
-                ballYSpeed *= -1;
+                puckYSpeed *= -1;
 
-                ball.Y = puckY;
+                puck.X = puckX;
+                puck.Y = puckY;
 
                 player2.X = p2X;
                 player2.Y = p2Y;
             }
 
-            if (p2Bot.IntersectsWith(ball))
+            if (p2Bot.IntersectsWith(puck))
             {
-                ballYSpeed *= -1;
+                puckYSpeed *= -1;
 
-                ball.Y = puckY;
+                puck.X = puckX;
+                puck.Y = puckY;
 
                 player2.X = p2X;
                 player2.Y = p2Y;
             }
 
-            if (p2Right.IntersectsWith(ball))
+            if (p2Right.IntersectsWith(puck))
             {
-                ballXSpeed *= -1;
+                puckXSpeed *= -1;
 
-                ball.X = puckX;
+                puck.X = puckX;
+                puck.Y = puckY;
 
                 player2.X = p2X;
                 player2.Y = p2Y;
             }
 
-            if (p2Left.IntersectsWith(ball))
+            if (p2Left.IntersectsWith(puck))
             {
-                ballXSpeed *= -1;
+                puckXSpeed *= -1;
 
-                ball.X = puckX;
+                puck.X = puckX;
+                puck.Y = puckY;
 
                 player2.X = p2X;
                 player2.Y = p2Y;
@@ -281,47 +291,79 @@ namespace airHockey
             lastP2X = player2.X;
             lastP2Y = player2.Y;
 
-        //prevent ball getting stuck in p1
-            if (p1Top.IntersectsWith(ball) && lastP1Y == p1Y)
+            //prevent puck getting stuck in p1
+            if (p1Top.IntersectsWith(puck) && lastP1Y == p1Y && lastP1X == p1X)
             {
-                player1.Y = player1.Y + 1;
+                player1.Y++;
+
             }
 
-            else if (p1Bot.IntersectsWith(ball) && lastP1Y == p1Y)
+            else if (p1Bot.IntersectsWith(puck) && lastP1Y == p1Y && lastP1X == p1X)
             {
-                player1.Y = player1.Y - 1;
+                player1.Y--;
             }
 
-            else if (p1Right.IntersectsWith(ball) && lastP1X == p1X)
+            else if (p1Right.IntersectsWith(puck) && lastP1Y == p1Y && lastP1X == p1X)
             {
-                player1.X = player1.X - 1;
+                player1.X--;
+                puck.X++;
             }
 
-            else if (p1Left.IntersectsWith(ball) && lastP1X == p1X)
+            else if (p1Left.IntersectsWith(puck) && lastP1Y == p1Y && lastP1X == p1X)
             {
-                player1.X = player1.X + 1;
+                player1.X++;
             }
 
-            //prevent ball getting stuck in p2
-            if (p2Top.IntersectsWith(ball) && lastP2Y == p2Y)
+            //prevent puck getting stuck in p2
+            if (p2Top.IntersectsWith(puck) && lastP2Y == p2Y && lastP2X == p2X)
             {
-                player2.Y = player2.Y + 1;
+                player2.Y++;
             }
 
-            else if (p2Bot.IntersectsWith(ball) && lastP2Y == p2Y)
+            else if (p2Bot.IntersectsWith(puck) && lastP2Y == p2Y && lastP2X == p2X)
             {
-                player2.Y = player2.Y - 1;
+                player2.Y++;
             }
 
-            else if (p2Right.IntersectsWith(ball) && lastP2X == p2X)
+            else if (p2Right.IntersectsWith(puck) && lastP2Y == p2Y && lastP2X == p2X)
             {
-                player2.X = player2.X - 1;
+                player2.X--;
             }
 
-            else if (p2Left.IntersectsWith(ball) && lastP2X == p2X)
+            else if (p2Left.IntersectsWith(puck) && lastP2Y == p2Y && lastP2X == p2X)
             {
-                player2.X = player2.X + 1;
+                player2.X++;
             }
+
+
+            if (player1Goal.IntersectsWith(puck))
+            {
+                player2Score++;
+                p2Score.Text = $"{player2Score}";
+
+                puck.X = 281;
+                puck.Y = 420;
+
+                player1.X = 260;
+                player1.Y = 258;
+                player2.X = 260;
+                player2.Y = 780;
+            }
+            else if (player2Goal.IntersectsWith(puck))
+            {
+                player1Score++;
+                p1Score.Text = $"{player1Score}";
+
+                puck.X = 281;
+                puck.Y = 420;
+
+                player1.X = 260;
+                player1.Y = 258;
+                player2.X = 260;
+                player2.Y = 780;
+            }
+
+
 
             Refresh();
         }
@@ -332,8 +374,10 @@ namespace airHockey
             int p1Y = player1.Y;
             int p2X = player2.X;
             int p2Y = player2.Y;
-            int puckX = ball.X;
-            int puckY = ball.Y;
+            int puckX = puck.X;
+            int puckY = puck.Y;
+
+            Rectangle boarder = new Rectangle(15, 15, this.Width - 30, this.Height - 30);
 
             Rectangle p1Top = new Rectangle(p1X, p1Y, 60, 1);
             Rectangle p1Bot = new Rectangle(p1X, p1Y + 60, 60, 1);
@@ -345,21 +389,18 @@ namespace airHockey
             Rectangle p2Right = new Rectangle(p2X + 60, p2Y, 1, 60);
             Rectangle p2Left = new Rectangle(p2X, p2Y, 1, 60);
 
-            e.Graphics.FillEllipse(blueBrush, player1);
-            e.Graphics.FillEllipse(redBrush, player2);
-            e.Graphics.FillEllipse(blackBrush, ball);
-
             e.Graphics.DrawRectangle(whitePen, p1Top);
             e.Graphics.DrawRectangle(whitePen, p1Bot);
             e.Graphics.DrawRectangle(whitePen, p1Right);
             e.Graphics.DrawRectangle(whitePen, p1Left);
+            e.Graphics.DrawRectangle(whitePen, player1Goal);
+            e.Graphics.DrawRectangle(whitePen, player2Goal);
+            e.Graphics.DrawRectangle(whitePen, boarder);
 
-            e.Graphics.DrawRectangle(whitePen, p2Top);
-            e.Graphics.DrawRectangle(whitePen, p2Bot);
-            e.Graphics.DrawRectangle(whitePen, p2Right);
-            e.Graphics.DrawRectangle(whitePen, p2Left);
+            e.Graphics.DrawImage(Properties.Resources.bluePaddel, player1);
+            e.Graphics.DrawImage(Properties.Resources.redPaddle, player2);
+            e.Graphics.FillEllipse(blackBrush, puck);
         }
-
     }
 }
 

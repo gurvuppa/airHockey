@@ -65,6 +65,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -78,6 +79,27 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\redPaddle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bluePaddel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\build-an-air-hockey-game-interface-creation--mobile-12296.htm" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\45166_5ca28c892d95107a5a9f1ba3d009c98f.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hockeyPuck.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hockey-puck-11530979194n2xo2d5a3a.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hockeyPuck5.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
