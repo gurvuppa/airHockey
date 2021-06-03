@@ -34,6 +34,7 @@ namespace airHockey
             this.gameTimer = new System.Windows.Forms.Timer(this.components);
             this.p1Score = new System.Windows.Forms.Label();
             this.p2Score = new System.Windows.Forms.Label();
+            this.winLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // gameTimer
@@ -45,9 +46,9 @@ namespace airHockey
             // p1Score
             // 
             this.p1Score.BackColor = System.Drawing.Color.Transparent;
-            this.p1Score.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.p1Score.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.p1Score.ForeColor = System.Drawing.Color.Red;
-            this.p1Score.Location = new System.Drawing.Point(2, 405);
+            this.p1Score.Location = new System.Drawing.Point(2, 395);
             this.p1Score.Name = "p1Score";
             this.p1Score.Size = new System.Drawing.Size(71, 23);
             this.p1Score.TabIndex = 0;
@@ -57,7 +58,7 @@ namespace airHockey
             // p2Score
             // 
             this.p2Score.BackColor = System.Drawing.Color.Transparent;
-            this.p2Score.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.p2Score.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.p2Score.ForeColor = System.Drawing.Color.Red;
             this.p2Score.Location = new System.Drawing.Point(2, 443);
             this.p2Score.Name = "p2Score";
@@ -66,6 +67,16 @@ namespace airHockey
             this.p2Score.Text = "0";
             this.p2Score.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
+            // winLabel
+            // 
+            this.winLabel.BackColor = System.Drawing.Color.Transparent;
+            this.winLabel.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.winLabel.Location = new System.Drawing.Point(177, 198);
+            this.winLabel.Name = "winLabel";
+            this.winLabel.Size = new System.Drawing.Size(227, 83);
+            this.winLabel.TabIndex = 2;
+            this.winLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -73,6 +84,7 @@ namespace airHockey
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(584, 861);
+            this.Controls.Add(this.winLabel);
             this.Controls.Add(this.p2Score);
             this.Controls.Add(this.p1Score);
             this.DoubleBuffered = true;
@@ -91,6 +103,7 @@ namespace airHockey
         private System.Windows.Forms.Timer gameTimer;
         private System.Windows.Forms.Label p1Score;
         private System.Windows.Forms.Label p2Score;
+        private System.Windows.Forms.Label winLabel;
     }
 }
 
