@@ -28,9 +28,9 @@ namespace airHockey
         int player1Score = 0;
         int player2Score = 0;
 
-        int PLAYER_SPEED = 7;
-        int puckXSpeed = 7;
-        int puckYSpeed = 7;
+        int PLAYER_SPEED = 5;
+        int puckXSpeed = 6;
+        int puckYSpeed = 6;
 
         int lastP1X;
         int lastP1Y;
@@ -163,15 +163,29 @@ namespace airHockey
             movePlayer();
 
             //puck collision with top and bottom walls
-            if (puck.Y <= 15 || puck.Y >= this.Height - puck.Height - 15)
+            if (puck.Y <= 15  )
             {
                 puckYSpeed *= -1;
+                puck.Y = 16;
+            }
+
+            if (puck.Y >= this.Height - puck.Height - 15)
+            {
+                puckYSpeed *= -1;
+                puck.Y = this.Height - puck.Height - 16;
             }
 
             //puck collision with left and right side wall
-            if (puck.X <= 15 || puck.X >= this.Width - puck.Width - 15)
+            if (puck.X <= 15 )
             {
                 puckXSpeed *= -1;
+                puck.X = 16;
+            }
+
+            if (puck.X >= this.Width - puck.Width - 15)
+            {
+                puckXSpeed *= -1;
+                puck.X = this.Width - puck.Width - 16;
             }
 
             //puck collision with player1
@@ -226,89 +240,82 @@ namespace airHockey
                 player2Shift(puckX, puckY, p2X, p2Y);
             }
 
+            //prevent puck getting stuck in p1\
+            if (player1.X == lastP1X && player1.Y == lastP1Y)
+            {
+                if (p1Top.IntersectsWith(puck))
+                {
+                    player1.Y++;
+                }
+                else if (p1Bot.IntersectsWith(puck) )
+                {
+                    player1.Y--;
+                }
+                else if (p1Right.IntersectsWith(puck))
+                {
+                    player1.X--;
+                }
+                else if (p1Left.IntersectsWith(puck))
+                {
+                    player1.X++;
+                }
+            }
+
+            //prevent puck getting stuck in p2
+            if (player2.X == lastP2X && player2.Y == lastP2Y)
+            {
+                if (p2Top.IntersectsWith(puck))
+                {
+                    player2.Y++;
+                }
+                else if (p2Bot.IntersectsWith(puck))
+                {
+                    player2.Y--;
+                }
+                else if (p2Right.IntersectsWith(puck))
+                {
+                    player2.X--;
+                }
+                else if (p2Left.IntersectsWith(puck))
+                {
+                    player2.X++;
+                }
+            }
+
+            // if there is a goal
+            //if (player1Goal.IntersectsWith(puck))
+            //{
+            //    player2Score++;
+            //    p2Score.Text = $"{player2Score}";
+
+            //    resetPosition();
+            //}
+            //else if (player2Goal.IntersectsWith(puck))
+            //{
+            //    player1Score++;
+            //    p1Score.Text = $"{player1Score}";
+
+            //    resetPosition();
+            //}
+            ////game end
+            //if (player1Score == 3)
+            //{
+            //    gameTimer.Enabled = false;
+            //    winLabel.Visible = true;
+            //    winLabel.Text = "Player 1 Wins!!";
+            //}
+            //else if (player2Score == 3)
+            //{
+            //    gameTimer.Enabled = false;
+            //    winLabel.Visible = true;
+            //    winLabel.Text = "Player 2 Wins!!";
+            //}
+
             //lattest movement
             lastP1X = player1.X;
             lastP1Y = player1.Y;
             lastP2X = player2.X;
             lastP2Y = player2.Y;
-
-            //prevent puck getting stuck in p1
-            if (p1Top.IntersectsWith(puck) && lastP1Y == p1Y && lastP1X == p1X)
-            {
-                player1.Y++;
-            }
-            else if (p1Bot.IntersectsWith(puck) && lastP1Y == p1Y && lastP1X == p1X)
-            {
-                player1.Y--;
-            }
-            else if (p1Right.IntersectsWith(puck) && lastP1Y == p1Y && lastP1X == p1X)
-            {
-                player1.X--;
-            }
-            else if (p1Left.IntersectsWith(puck) && lastP1Y == p1Y && lastP1X == p1X)
-            {
-                player1.X++;
-            }
-
-            //prevent puck getting stuck in p2
-            if (p2Top.IntersectsWith(puck) && lastP2Y == p2Y && lastP2X == p2X)
-            {
-                player2.Y++;
-            }
-            else if (p2Bot.IntersectsWith(puck) && lastP2Y == p2Y && lastP2X == p2X)
-            {
-                player2.Y++;
-            }
-            else if (p2Right.IntersectsWith(puck) && lastP2Y == p2Y && lastP2X == p2X)
-            {
-                player2.X--;
-            }
-            else if (p2Left.IntersectsWith(puck) && lastP2Y == p2Y && lastP2X == p2X)
-            {
-                player2.X++;
-            }
-
-           // //if ball gets stuck on the wall
-           // if (boarder.IntersectsWith(puck) && puck.X < 10 || boarder.IntersectsWith(puck) && puck.Y > this.Height - puck.Height - 10)
-           // {
-           //     puckYSpeed *= -1;
-           //     puck.X = player1.X - 50;
-           //     puck.Y = player1.Y - 50;
-           // }
-           //else if (boarder.IntersectsWith(puck) && puck.Y < 12 || boarder.IntersectsWith(puck) && puck.X > this.Width - puck.Width - 12)
-           // {
-           //     puck.X = player1.X + 50;
-           //     puck.Y = player1.Y + 50;
-           // }
-           
-            // if there is a goal
-            if (player1Goal.IntersectsWith(puck))
-            {
-                player2Score++;
-                p2Score.Text = $"{player2Score}";
-
-                resetPosition();
-            }
-            else if (player2Goal.IntersectsWith(puck))
-            {
-                player1Score++;
-                p1Score.Text = $"{player1Score}";
-
-                resetPosition();
-            }
-            //game end
-            if (player1Score == 3)
-            {
-                gameTimer.Enabled = false;
-                winLabel.Visible = true;
-                winLabel.Text = "Player 1 Wins!!";
-            }
-            else if (player2Score == 3)
-            {
-                gameTimer.Enabled = false;
-                winLabel.Visible = true;
-                winLabel.Text = "Player 2 Wins!!";
-            }
 
             Refresh();
         }
