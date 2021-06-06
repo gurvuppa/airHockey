@@ -86,6 +86,8 @@ namespace airHockey
             titleLabel.Text = "";
             subTitleLabel.Text = "";
 
+            titleLabel.Visible = false;
+            subTitleLabel.Visible = false;
             gameTimer.Enabled = true;
             gameState = "running";
             player1Score = 0;
@@ -341,6 +343,7 @@ namespace airHockey
             }
             else if (gameState == "over")
             {
+                subTitleLabel.Visible = true;
                 subTitleLabel.Text = "\nPress Space Bar to play Again or Escape to Exit";
             }
         }
@@ -395,18 +398,21 @@ namespace airHockey
             {
                 if (touch == true)
                 {
-                    if ((p1Top.IntersectsWith(puck)) || (p1Bot.IntersectsWith(puck)) || (p1Right.IntersectsWith(puck)) || (p1Left.IntersectsWith(puck))
-                        || (p2Top.IntersectsWith(puck)) || (p2Bot.IntersectsWith(puck)) || (p2Right.IntersectsWith(puck)) || (p2Left.IntersectsWith(puck)))
+                    if ((p1Top.IntersectsWith(puck)) || (p1Bot.IntersectsWith(puck)) || 
+                        (p2Top.IntersectsWith(puck)) || (p2Bot.IntersectsWith(puck)) )
                     {
+                        puckXSpeed = 0;
                         puck.X += puckXSpeed;
                         puck.Y += puckYSpeed;
                         touch = false;
                     }
                 }
-                else
+                 if ((p1Right.IntersectsWith(puck)) || (p1Left.IntersectsWith(puck)) || (p2Right.IntersectsWith(puck)) || (p2Left.IntersectsWith(puck)))
                 {
+                    puckYSpeed = 0;
                     puck.X += puckXSpeed;
                     puck.Y += puckYSpeed;
+                    touch = false;
                 }
             }
             else
@@ -457,10 +463,12 @@ namespace airHockey
                 speedChance = RandGen.Next(0, 10);
                 if (speedChance <= 3)
                 {
+                    puckXSpeed = 0;
                     puckYSpeed = puckYSpeed * -1 - variableSpeed;   //speed multiplyer
                 }
                 else
                 {
+                    puckXSpeed = 0;
                     puckYSpeed *= -1;
                 }
 
@@ -471,10 +479,12 @@ namespace airHockey
                 speedChance = RandGen.Next(0, 10);
                 if (speedChance <= 3)
                 {
+                    puckXSpeed = 0;
                     puckYSpeed = puckYSpeed * -1 + variableSpeed;
                 }
                 else
                 {
+                    puckXSpeed = 0;
                     puckYSpeed *= -1;
                 }
 
@@ -514,10 +524,12 @@ namespace airHockey
                 speedChance = RandGen.Next(0, 10);
                 if (speedChance <= 3)
                 {
+                    puckXSpeed = 0;
                     puckYSpeed = puckYSpeed * -1 - variableSpeed;
                 }
                 else
                 {
+                    puckXSpeed = 0;
                     puckYSpeed *= -1;
                 }
 
@@ -528,10 +540,12 @@ namespace airHockey
                 speedChance = RandGen.Next(0, 10);
                 if (speedChance <= 3)
                 {
+                    puckXSpeed = 0;
                     puckYSpeed = puckYSpeed * -1 + variableSpeed;
                 }
                 else
                 {
+                    puckXSpeed = 0;
                     puckYSpeed *= -1;
                 }
 
@@ -615,7 +629,8 @@ namespace airHockey
             {
                 player2Score++;
                 p2Score.Text = $"{player2Score}";
-                titleLabel.Text = "PLAYER 1 GOAL!!";
+                titleLabel.Visible = true;
+                titleLabel.Text = "PLAYER 2 GOAL!!";
 
                 goalPlayer = new SoundPlayer(Properties.Resources.Toronto_Maple_Leafs_2020_Goal_Horn);
                 goalPlayer.Play();
@@ -627,7 +642,8 @@ namespace airHockey
             {
                 player1Score++;
                 p1Score.Text = $"{player1Score}";
-                titleLabel.Text = "PLAYER 2 GOAL!!";
+                titleLabel.Visible = true;
+                titleLabel.Text = "PLAYER 1 GOAL!!";
 
                 goalPlayer = new SoundPlayer(Properties.Resources.Toronto_Maple_Leafs_2020_Goal_Horn);
                 goalPlayer.Play();
