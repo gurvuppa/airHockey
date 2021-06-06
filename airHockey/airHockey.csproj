@@ -101,5 +101,14 @@
   <ItemGroup>
     <None Include="Resources\hockeyPuck5.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\airHockey.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Toronto Maple Leafs 2020 Goal Horn.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gameMusic.wav" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

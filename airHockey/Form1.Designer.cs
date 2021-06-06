@@ -34,12 +34,12 @@ namespace airHockey
             this.gameTimer = new System.Windows.Forms.Timer(this.components);
             this.p1Score = new System.Windows.Forms.Label();
             this.p2Score = new System.Windows.Forms.Label();
-            this.winLabel = new System.Windows.Forms.Label();
+            this.titleLabel = new System.Windows.Forms.Label();
+            this.subTitleLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // gameTimer
             // 
-            this.gameTimer.Enabled = true;
             this.gameTimer.Interval = 20;
             this.gameTimer.Tick += new System.EventHandler(this.gameTimer_Tick);
             // 
@@ -47,8 +47,8 @@ namespace airHockey
             // 
             this.p1Score.BackColor = System.Drawing.Color.Transparent;
             this.p1Score.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.p1Score.ForeColor = System.Drawing.Color.Red;
-            this.p1Score.Location = new System.Drawing.Point(2, 395);
+            this.p1Score.ForeColor = System.Drawing.Color.Green;
+            this.p1Score.Location = new System.Drawing.Point(258, 34);
             this.p1Score.Name = "p1Score";
             this.p1Score.Size = new System.Drawing.Size(71, 23);
             this.p1Score.TabIndex = 0;
@@ -59,23 +59,36 @@ namespace airHockey
             // 
             this.p2Score.BackColor = System.Drawing.Color.Transparent;
             this.p2Score.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.p2Score.ForeColor = System.Drawing.Color.Red;
-            this.p2Score.Location = new System.Drawing.Point(2, 443);
+            this.p2Score.ForeColor = System.Drawing.Color.Green;
+            this.p2Score.Location = new System.Drawing.Point(258, 801);
             this.p2Score.Name = "p2Score";
-            this.p2Score.Size = new System.Drawing.Size(71, 23);
+            this.p2Score.Size = new System.Drawing.Size(71, 29);
             this.p2Score.TabIndex = 1;
             this.p2Score.Text = "0";
             this.p2Score.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // winLabel
+            // titleLabel
             // 
-            this.winLabel.BackColor = System.Drawing.Color.Transparent;
-            this.winLabel.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.winLabel.Location = new System.Drawing.Point(177, 198);
-            this.winLabel.Name = "winLabel";
-            this.winLabel.Size = new System.Drawing.Size(227, 83);
-            this.winLabel.TabIndex = 2;
-            this.winLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.titleLabel.BackColor = System.Drawing.Color.Transparent;
+            this.titleLabel.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.titleLabel.Location = new System.Drawing.Point(23, 210);
+            this.titleLabel.Name = "titleLabel";
+            this.titleLabel.Size = new System.Drawing.Size(540, 104);
+            this.titleLabel.TabIndex = 2;
+            this.titleLabel.Text = "titleLabel";
+            this.titleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // subTitleLabel
+            // 
+            this.subTitleLabel.BackColor = System.Drawing.Color.Transparent;
+            this.subTitleLabel.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.subTitleLabel.ForeColor = System.Drawing.Color.MediumTurquoise;
+            this.subTitleLabel.Location = new System.Drawing.Point(24, 294);
+            this.subTitleLabel.Name = "subTitleLabel";
+            this.subTitleLabel.Size = new System.Drawing.Size(540, 57);
+            this.subTitleLabel.TabIndex = 3;
+            this.subTitleLabel.Text = "subTitleLabel";
+            this.subTitleLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // Form1
             // 
@@ -84,12 +97,14 @@ namespace airHockey
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(584, 861);
-            this.Controls.Add(this.winLabel);
+            this.Controls.Add(this.subTitleLabel);
+            this.Controls.Add(this.titleLabel);
             this.Controls.Add(this.p2Score);
             this.Controls.Add(this.p1Score);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
@@ -103,7 +118,8 @@ namespace airHockey
         private System.Windows.Forms.Timer gameTimer;
         private System.Windows.Forms.Label p1Score;
         private System.Windows.Forms.Label p2Score;
-        private System.Windows.Forms.Label winLabel;
+        private System.Windows.Forms.Label titleLabel;
+        private System.Windows.Forms.Label subTitleLabel;
     }
 }
 

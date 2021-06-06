@@ -63,6 +63,16 @@ namespace airHockey.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap airHockey {
+            get {
+                object obj = ResourceManager.GetObject("airHockey", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap bluePaddel {
             get {
                 object obj = ResourceManager.GetObject("bluePaddel", resourceCulture);
@@ -77,6 +87,15 @@ namespace airHockey.Properties {
             get {
                 object obj = ResourceManager.GetObject("blueRedPaddle", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream gameMusic {
+            get {
+                return ResourceManager.GetStream("gameMusic", resourceCulture);
             }
         }
         
@@ -117,6 +136,15 @@ namespace airHockey.Properties {
             get {
                 object obj = ResourceManager.GetObject("redPaddle", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream Toronto_Maple_Leafs_2020_Goal_Horn {
+            get {
+                return ResourceManager.GetStream("Toronto_Maple_Leafs_2020_Goal_Horn", resourceCulture);
             }
         }
     }
