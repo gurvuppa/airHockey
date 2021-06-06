@@ -393,17 +393,25 @@ namespace airHockey
             //move puck
             if (touch == true)
             {
-                if ((p1Top.IntersectsWith(puck)) || (p1Bot.IntersectsWith(puck)) || (p1Right.IntersectsWith(puck)) || (p1Left.IntersectsWith(puck))
-                    || (p2Top.IntersectsWith(puck)) || (p2Bot.IntersectsWith(puck)) || (p2Right.IntersectsWith(puck)) || (p2Left.IntersectsWith(puck)))
+                if (touch == true)
                 {
-                    //puck.X += puckXSpeed;
+                    if ((p1Top.IntersectsWith(puck)) || (p1Bot.IntersectsWith(puck)) || (p1Right.IntersectsWith(puck)) || (p1Left.IntersectsWith(puck))
+                        || (p2Top.IntersectsWith(puck)) || (p2Bot.IntersectsWith(puck)) || (p2Right.IntersectsWith(puck)) || (p2Left.IntersectsWith(puck)))
+                    {
+                        puck.X += puckXSpeed;
+                        puck.Y += puckYSpeed;
+                        touch = false;
+                    }
+                }
+                else
+                {
+                    puck.X += puckXSpeed;
                     puck.Y += puckYSpeed;
-                    touch = false;
                 }
             }
             else
             {
-               // puck.X += puckXSpeed;
+                puck.X += puckXSpeed;
                 puck.Y += puckYSpeed;
             }
         }
@@ -414,7 +422,7 @@ namespace airHockey
             {
                 //setting this to 6 instead of *= -1 because it ignors the speed multiplyer
                 //and slows the ball down when contact is made and sends it in the opposite direction
-                puckYSpeed = 6;                        
+                puckYSpeed = 6;
                 puck.Y = 16;
             }
             if (puck.Y >= this.Height - puck.Height - 15)
